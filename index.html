@@ -15,9 +15,12 @@
     <div id="typing-text">
 
     </div>
-    <p>Input: <input type="text" name="" id="answer"><id="last" style="padding-left: 5px;">0 WPM</p></p>
-    
-    
+    <p>Input: <input type="text" name="" id="answer">
+        <id="last" style="padding-left: 5px;">0 WPM
+    </p>
+    </p>
+
+
 </body>
 
 </html>
@@ -35,8 +38,8 @@
     underlineWord()
 
     $('#answer').keydown(function (e) {
-        if(running == false) { // run game on first key press
-            start = new Date() 
+        if (running == false) { // run game on first key press
+            start = new Date()
             running = true;
         }
         if (e.keyCode == 32) {
@@ -53,17 +56,17 @@
     function reset() { // resets the game, gets word value from input
         $('#typing-text').text('')
         running = false
-        if($("#numWords").val() < 5) {
+        if ($("#numWords").val() < 5) {
             wordAmount = 5;
         } else {
-            wordAmount = $("#numWords").val()
+            wordAmount = parseInt($("#numWords").val())
         }
         generateWords()
         underlineWord()
     }
- 
+
     function underlineWord() { // underlines the current word, marks the right/wrong words, tallies up the correct words, handles end condition
-        if($("#answer").val() == currentWordList[currentWord-1] && currentWord != 0) { // check if input matches underlined word
+        if ($("#answer").val().trim() == currentWordList[currentWord - 1] && currentWord != 0) { // check if input matches underlined word
             correctWord++
             $(`#${currentWord - 1}`).removeClass("word-current").addClass("word-correct")
         } else {
@@ -73,8 +76,8 @@
         }
         $(`#${currentWord}`).removeClass("word").addClass("word-current") // underline the current word
         currentWord++
-        if(currentWord == wordAmount + 1) { // end the game
-            time = (new Date() - start)/1000
+        if (currentWord >= wordAmount + 1) { // end the game
+            time = (new Date() - start) / 1000
             wpm = Math.ceil((60 / time) * correctWord)
             alert(`${wpm} WPM`)
             $('#last').text(`${wpm} WPM`)
@@ -124,6 +127,7 @@
         padding-bottom: 5px;
         color: green;
     }
+
     div.word-wrong {
         display: inline-block;
         padding-right: 5px;
